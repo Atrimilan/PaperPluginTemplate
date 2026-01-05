@@ -1,5 +1,4 @@
-
-group = "io.github.atrimilan.paperplugintemplate"
+import io.papermc.paperweight.userdev.ReobfArtifactConfiguration
 
 plugins {
     id("java")
@@ -15,34 +14,44 @@ repositories {
     }
 }
 
-paperweight.reobfArtifactConfiguration = io.papermc.paperweight.userdev.ReobfArtifactConfiguration.MOJANG_PRODUCTION
+fun getProperty(key: String): String { // Get values from gradle.properties
+    return project.property(key) as String
+}
+
+group = getProperty("groupId")
+version = getProperty("projectVersion")
 
 dependencies {
     // PaperMC (using paperweight-userdev)
-    paperweight.paperDevBundle("1.20.6-R0.1-SNAPSHOT")
+    paperweight.paperDevBundle(getProperty("paperApiVersion"))
     // JUnit
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
-val localServerDir = "local-server"
+paperweight.reobfArtifactConfiguration = ReobfArtifactConfiguration.MOJANG_PRODUCTION
+
+val localServerDir = "local-server" // Change the server directory here
+val serverPort = 25565  // Change the server port here
 
 tasks {
     runServer {
         runDirectory.set(file(localServerDir))
 
         jvmArgs(
-            "-Dcom.mojang.eula.agree=true", "-Dserver.port=25565"
+            "-Dcom.mojang.eula.agree=true", "-Dserver.port=$serverPort"
         )
 
         doFirst {
-            val serverProperties = file("${localServerDir}/server.properties")
-            val bukkitYml = file("${localServerDir}/bukkit.yml")
+            // Note: if you have already run the server once, you must manually delete the following files in order to modify them
+            val serverProperties = file("$localServerDir/server.properties")
+            val bukkitYml = file("$localServerDir/bukkit.yml")
 
             listOf(serverProperties, bukkitYml).forEach { file ->
                 file.parentFile.mkdirs()
             }
-            serverProperties.writeText(
+            serverProperties.writeText( // Edit server.properties here
                 """
                 allow-nether=false
                 enable-command-block=true
@@ -51,7 +60,7 @@ tasks {
                 motd=A local Paper server
                 """.trimIndent()
             )
-            bukkitYml.writeText(
+            bukkitYml.writeText( // Edit bukkit.yml here
                 """
                 settings:
                   allow-end: false

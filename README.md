@@ -13,8 +13,9 @@ A template to get started with Paper plugin development.
 
 ## Using the template
 
-Since this is just an example project, you will need to follow the official documentation to learn how to modify
-[build.gradle.kts](build.gradle.kts) and [plugin.yml](src/main/resources/plugin.yml) to suit your needs.
+Since this is just an example project, you will need to follow official documentations of PaperMC and Gradle to learn
+how to modify [build.gradle.kts](build.gradle.kts) and [plugin.yml](src/main/resources/plugin.yml) to suit your needs.
+Don't forget to edit [gradle.properties](gradle.properties) as well.
 
 You can then use this project as a starting point to create your own plugins, or modify the architecture if you prefer.
 
@@ -23,7 +24,8 @@ Here are the main Gradle task you will need:
   ```sh
   ./gradlew runServer
   ```
-  This will automatically start a local server with your plugin a `localhost:25565`.
+  This will automatically start a local server with your plugin at `localhost:25565`
+  (since this is the default port, you can simply use `localhost` to connect).
 
 * Build a JAR file:
   ```sh
