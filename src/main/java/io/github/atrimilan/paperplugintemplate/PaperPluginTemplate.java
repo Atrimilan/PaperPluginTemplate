@@ -3,6 +3,8 @@ package io.github.atrimilan.paperplugintemplate;
 import io.github.atrimilan.paperplugintemplate.commands.FlySpeedCommand;
 import io.github.atrimilan.paperplugintemplate.commands.ReadConfigCommand;
 import io.github.atrimilan.paperplugintemplate.eventlisteners.PlayerActionsListener;
+import io.github.atrimilan.paperplugintemplate.services.FlySpeedService;
+import io.github.atrimilan.paperplugintemplate.services.ReadConfigService;
 import io.papermc.paper.command.brigadier.Commands;
 import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -23,8 +25,8 @@ public class PaperPluginTemplate extends JavaPlugin {
     }
 
     private void registerPluginCommands() {
-        FlySpeedCommand flySpeedCommand = new FlySpeedCommand();
-        ReadConfigCommand readConfigCommand = new ReadConfigCommand(this);
+        FlySpeedCommand flySpeedCommand = new FlySpeedCommand(new FlySpeedService());
+        ReadConfigCommand readConfigCommand = new ReadConfigCommand(new ReadConfigService(this.getConfig()));
 
         this.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, event -> {
             final Commands commands = event.registrar();

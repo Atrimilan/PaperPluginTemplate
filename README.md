@@ -41,10 +41,12 @@ Here are the main Gradle task you will need:
 This template shows some examples of what can be done when creating plugins, such as adding custom commands with permissions,
 reading file values, and listening to in-game events to perform actions.
 
-Overridden event:
+There are also unit tests written with [JUnit](https://junit.org/) and [Mockito](https://site.mockito.org/), to give an idea of what testing a paper plugin looks like.
+
+**Overridden event:**
 * When a player joins the server, the welcome message is customized (formatted with [MiniMessage](https://docs.papermc.io/adventure/minimessage/)).
 
-Available commands:
+**Available commands:**
 * `/flyspeed <speed>`
   * Set the flight speed of the player executing the command
   * Permission: `ppt.flyspeed.self`

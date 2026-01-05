@@ -24,9 +24,11 @@ version = getProperty("projectVersion")
 dependencies {
     // PaperMC (using paperweight-userdev)
     paperweight.paperDevBundle(getProperty("paperApiVersion"))
-    // JUnit
-    testImplementation(platform("org.junit:junit-bom:5.10.0"))
+    // JUnit & Mockito
+    testImplementation(platform("org.junit:junit-bom:6.0.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
+    testImplementation("org.mockito:mockito-core:5.+")
+    testImplementation("org.mockito:mockito-junit-jupiter:5.+")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 

@@ -1,5 +1,6 @@
 ### Project ###
 local-server/
+logs/
 
 ### Gradle ###
 .gradle
