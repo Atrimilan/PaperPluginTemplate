@@ -14,16 +14,16 @@ repositories {
     }
 }
 
-fun getProperty(key: String): String { // Get values from gradle.properties
-    return project.property(key) as String
-}
+val groupId: String by project
+val projectVersion: String by project
+val paperApiVersion: String by project
 
-group = getProperty("groupId")
-version = getProperty("projectVersion")
+group = groupId
+version = projectVersion
 
 dependencies {
     // PaperMC (using paperweight-userdev)
-    paperweight.paperDevBundle(getProperty("paperApiVersion"))
+    paperweight.paperDevBundle(paperApiVersion)
     // JUnit & Mockito
     testImplementation(platform("org.junit:junit-bom:6.0.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
